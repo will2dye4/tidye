@@ -1,0 +1,23 @@
+{
+  "planet": {
+    "mass": 1000
+  },
+  "moons": [
+    {
+      "mass": 100,
+      "orbital_radius": 300,
+      "orbital_period": 1
+    },
+    {
+      "mass": 200,
+      "orbital_radius": 500,
+      "orbital_period": 2,
+      "orbital_phase": 0.5
+    },
+    {
+      "mass": 150,
+      "orbital_radius": 400,
+      "geostationary": true
+    }
+  ]
+}
