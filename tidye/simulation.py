@@ -27,7 +27,7 @@ class TidalSimulation:
         return np.sin((t * moon.frequency) + moon.phase) * amplitude
 
     def simulate(self) -> None:
-        t = np.linspace(0, self.duration, max(100, int(self.duration) * 5))
+        t = np.linspace(0, self.duration, max(100, int(self.duration) * 20))
         waves = [self.lunar_force(moon, t) for moon in self.planet.moons]
         waves.append(self.tidal_force(t))
 
