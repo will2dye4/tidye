@@ -11,7 +11,7 @@ class TidalSimulation:
     def __init__(self, planet: Planet, duration: float = 0) -> None:
         self.planet = planet
         if not duration:
-            max_period = max(moon.orbital_period for moon in planet.moons)
+            max_period = max(moon.period for moon in planet.moons)
             duration = 2 * max_period * math.tau
         self.duration = duration
 
@@ -28,9 +28,7 @@ class TidalSimulation:
 
     def simulate(self) -> None:
         t = np.linspace(0, self.duration, 100)
-        waves = []
-        for moon in self.planet.moons:
-            waves.append(self.lunar_force(moon, t))
+        waves = [self.lunar_force(moon, t) for moon in self.planet.moons]
         waves.append(self.tidal_force(t))
 
         _, ax = plt.subplots()
@@ -40,8 +38,12 @@ class TidalSimulation:
 
         min_force = np.min(waves)
         max_force = np.max(waves)
-        ax.set(xlim=(0, self.duration), ylim=(min_force + (min_force * 0.1), max_force + (max_force * 0.1)),
-               xticks=np.arange(1, self.duration), xlabel='Time', ylabel='Tidal Force')
+        ax.set(
+            xlim=(0, self.duration),
+            ylim=(min_force + (min_force * 0.1), max_force + (max_force * 0.1)),
+            xlabel='Time',
+            ylabel='Tidal Force',
+        )
 
         plt.legend(loc='upper right')
         plt.show()

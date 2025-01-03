@@ -16,8 +16,13 @@ class Moon:
     geostationary: bool = False
 
     @property
+    def period(self) -> float:
+        # Normalize the period so that orbital_period = 1 means 1 unit instead of 2π units.
+        return self.orbital_period / math.tau
+
+    @property
     def frequency(self) -> float:
-        return 1 / self.orbital_period
+        return 1 / self.period
 
     @property
     def phase(self) -> float:
